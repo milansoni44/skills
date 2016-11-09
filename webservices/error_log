@@ -1,0 +1,83 @@
+[30-Sep-2016 12:11:30 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:30 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:30 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:30 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:30 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:30 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:11:51 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:51 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:51 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:51 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:51 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:51 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:11:52 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:52 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:52 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:52 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:52 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:52 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:11:59 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:59 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:59 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:11:59 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:59 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:11:59 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:12:01 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:12:01 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:12:01 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:12:01 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:12:01 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:12:01 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:12:02 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:12:02 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:12:02 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:12:02 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:12:02 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:12:02 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:13:13 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:13:13 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:13:13 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:13:13 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:13:13 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:13:13 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:14:16 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:14:16 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:14:16 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:14:16 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:14:16 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:14:16 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:15:12 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:15:12 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:15:12 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:16:25 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:16:25 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:16:25 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:16:25 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:16:25 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:16:25 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:16:27 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:16:27 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:16:27 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:16:27 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:16:27 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:16:27 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  include(../config.php): failed to open stream: No such file or directory in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  include(): Failed opening '../config.php' for inclusion (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/aursbouj/public_html/webservices/Api.php on line 3
+[30-Sep-2016 12:17:11 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 15
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 16
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 24
+[30-Sep-2016 12:17:11 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 39
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 39
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 40
+[30-Sep-2016 12:17:11 America/New_York] PHP Notice:  Undefined variable: profile_pic in /home/aursbouj/public_html/webservices/cases/login.php on line 51
+[30-Sep-2016 12:17:11 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 73
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 73
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 77
+[30-Sep-2016 12:17:11 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 90
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 90
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 94
+[30-Sep-2016 12:17:11 America/New_York] PHP Notice:  Undefined variable: conn in /home/aursbouj/public_html/webservices/cases/login.php on line 107
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 107
+[30-Sep-2016 12:17:11 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, null given in /home/aursbouj/public_html/webservices/cases/login.php on line 111

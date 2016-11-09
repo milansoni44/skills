@@ -1,0 +1,7 @@
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+DirectoryIndex index.php
+ErrorDocument 404 http://learning-delight.com/skills/index.php
+</IfModule>
+

@@ -1,0 +1,12 @@
+Username: 	info@aurseekho.website
+Password: 	Use the email account’s password.
+Incoming Server: 	mail.aurseekho.website
+
+    IMAP Port: 143
+    POP3 Port: 110
+
+Outgoing Server: 	mail.aurseekho.website
+
+    SMTP Port: 26
+
+Authentication is required for IMAP, POP3, and SMTP.
