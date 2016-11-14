@@ -59,22 +59,22 @@
           </ul>
         </div>
         <div class="col-xs-12 col-md-3">
-          <h4 class="text-headline text-light">Other Logins</h4>
+          <h4 class="text-headline text-light"><?php echo $other_login_translate; ?></h4>
           <ul class="list-unstyled">
-          	<li><a href="http://<?php echo $website_name;?>/organisation">Organisation Portal</a></li>
+          	<li><a href="http://<?php echo $website_name;?>/organisation"><?php echo $organisation_portal_translate; ?></a></li>
           </ul>
      
           
 
         </div>
         <div class="col-xs-12 col-md-3">
-          <h4 class="text-headline text-light">Newsletter</h4>
+          <h4 class="text-headline text-light"><?php echo $newsletter_translate; ?></h4>
 
           <div class="form-group">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Enter email here...">
               <span class="input-group-btn">
-								<button class="btn btn-grey-800" type="button">Subscribe</button>
+								<button class="btn btn-grey-800" type="button"><?php echo $subscribe_translate; ?></button>
 							  </span>
             </div>
           </div>
@@ -88,7 +88,7 @@
 
           <ul class="list-unstyled">
           	<li>
-            <a target="_blank" href="https://docs.google.com/forms/d/1lAlv-C5SZ-Y2VvyZcPIuSUfk444f1QXJxVf-K7snngw/viewform?ts=57dfe3dd&edit_requested=true">Feedback Form</a>								
+            <a target="_blank" href="https://docs.google.com/forms/d/1lAlv-C5SZ-Y2VvyZcPIuSUfk444f1QXJxVf-K7snngw/viewform?ts=57dfe3dd&edit_requested=true"><?php echo $feedback_form_translate; ?></a>
             </li>
           </ul>
 
@@ -101,9 +101,9 @@
 
 
   <!-- Footer -->
-  <footer class="footer">
+  <!--<footer class="footer">
     <strong>Aur Seekho </strong>(Beta) © Copyright 2016
-  </footer>
+  </footer>-->
   <!-- // Footer -->
 <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document" style="margin-top:50px; width:auto;">
@@ -112,7 +112,7 @@
         <div class="lock-container">
         <div class="panel panel-default text-center paper-shadow" data-z="0.5">
           <img src="images/logo.png"  style="margin-top:50px;" height="70">
-          <h1 class="text-display-1 text-center margin-bottom-none">Sign In <span style="font-size: 14px;"><a href="./organisation">Organisation Portal</a></span></h1>
+          <h1 class="text-display-1 text-center margin-bottom-none">Sign In</h1>
           <form method="post" action="login.php" id="login_form_submit">
           <div class="panel-body">
             <div class="form-group">
@@ -138,6 +138,9 @@
             <a class="link-text-color signup" style="cursor:pointer;" >Create account</a>
           </div>
           </form>
+          <div class="panel-footer">
+          <span style="font-size: 14px;"> For Organisation Portal Login <a href="./organisation">Click Here</a></span>
+          </div>
         </div>
       </div>
      
@@ -484,6 +487,8 @@
 				}
 				else{
 					$('#error_signup').show();
+					$('.signup_submit').show();
+  				    $('.signup_loading').hide();
 				}				
 
 			}
@@ -531,9 +536,9 @@
 
     </style>
  <?php
- if(isset($_SESSION['id'])){
+ if(isset($_COOKIE['id']) && $pagename != "profile.php"){
  ?>
-<a id="back-to-top" target="_blank" href="https://docs.google.com/forms/d/1lAlv-C5SZ-Y2VvyZcPIuSUfk444f1QXJxVf-K7snngw/viewform?ts=57dfe3dd&edit_requested=true" class="btn btn-primary btn-lg" role="button" title="We want your Feedback">Feedback</a>
+<a id="back-to-top" target="_blank" href="https://docs.google.com/forms/d/1lAlv-C5SZ-Y2VvyZcPIuSUfk444f1QXJxVf-K7snngw/viewform?ts=57dfe3dd&edit_requested=true" class="btn btn-primary btn-lg" role="button" title="<?php echo $want_feedback_translate;?>">Feedback</a>
 <?php
 }
 ?>

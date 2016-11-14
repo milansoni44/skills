@@ -8,9 +8,9 @@
 	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	
 	
-	if(isset($_SESSION['language']) && !isset($_GET['lan'])){
+	if(isset($_COOKIE['language']) && !isset($_GET['lan'])){
 		#$language = "lan1";
-		$language = $_SESSION["language"];
+		$language = $_COOKIE["language"];
 		
 	}	
 	else
@@ -19,7 +19,8 @@
 	
 		if(isset($_GET['lan'])){
 		$lan = $_GET['lan'];
-		$_SESSION['language'] = $lan;
+		$_COOKIE['language'] = $lan;
+		setcookie("language", $lan, time() + (31556926), "/");
 
 		
 
@@ -34,7 +35,8 @@
 		}
 		else
 		{
-			$_SESSION['language'] = "lan2";
+			//$_COOKIE['language'] = "lan2";
+			setcookie("language", "lan2", time() + (31556926), "/");
 			$language = "lan2";
 		}
 	}
@@ -166,6 +168,8 @@
             <?php
             $query = "SELECT * FROM `courses` where p_id = '".$cat_id."' ";	
 			$sql = mysqli_query($conn,$query);
+			$cor_num = mysqli_num_rows($sql);
+			
 			while($result= mysqli_fetch_array($sql)){
 			
 				$c_id = $result["c_id"];
@@ -182,7 +186,7 @@
 				}
 				
 				
-				$uid =$_SESSION['id'];
+				$uid =$_COOKIE['id'];
 				$query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = $uid";	
 				$sql_check_cor = mysqli_query($conn,$query_check_cor);			
 				$check_cor = mysqli_num_rows($sql_check_cor);
@@ -223,9 +227,9 @@
                   <div class="panel-heading">
                     <div class="media media-clearfix-xs-min v-middle">
                       <div class="media-body text-caption text-light">
-                        <?php if(isset($_SESSION['id'])){echo $intCount."/";}?><?php echo $vid_num; ?> Videos
+                        <?php if(isset($_COOKIE['id'])){echo $intCount."/";}?><?php echo $vid_num; ?> Videos
                       </div>
-                     <?php if(isset($_SESSION['id'])){
+                     <?php if(isset($_COOKIE['id'])){
 					 ?>
                      <div class="media-right">
                         <div class="progress progress-mini width-100 margin-none">
@@ -316,7 +320,32 @@
             </div><?php */?>
             <?php
 				}
+				if($cor_num == 0){
             ?>
+            <div class="item col-xs-12 col-sm-12 col-lg-12 col-md-12" style="padding-bottom:250px; position:fixed;">
+            <div class="panel panel-default" style="clear:both;">
+                    <div class="media v-middle">
+                      <div class="media-left">
+                        <div class="bg-green-400 text-white">
+                          <div class="panel-body">
+                            <i class="fa fa-credit-card fa-fw fa-2x"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        No Course.
+                      </div>
+                      <!--<div class="media-right media-padding">
+                        <a class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated href="my_courses.php">
+                        Go to My Courses
+                    </a>
+                      </div>-->
+                    </div>
+                  </div>
+            </div>
+            <?php
+            	}
+			?>
           </div>
 
             <br/>

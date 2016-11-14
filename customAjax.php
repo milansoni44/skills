@@ -11,7 +11,7 @@
 	switch ($action)
 	{
 		case 'checklogin':
-			if (isset($_SESSION['id']) && $_SESSION['id'] != '')
+			if (isset($_COOKIE['id']) && $_COOKIE['id'] != '')
 			{
 				echo 'login';
 			}
@@ -22,7 +22,7 @@
 			break;
 		case 'checkCourse':
 			$intCatId = $_REQUEST['cat_id'];
-			$uid = $_SESSION['id'];
+			$uid = $_COOKIE['id'];
 			$sqlVideoWatch = "SELECT count('uc_id') as count FROM user_course WHERE u_id='" . $uid . "' and cat_id = '$intCatId'";
 
 			$sqlVV = mysqli_query($conn, $sqlVideoWatch);
@@ -42,7 +42,7 @@
 			$u_name = $_REQUEST["u_name"];
 			$password = $_REQUEST["password"];
 
-			$query = "Select * from user where email = '$u_name' and password ='$password' and u_type = 'user' AND status = 'active'";
+			$query = "Select * from user where email = '$u_name' and password ='$password' and u_type = 'user'";
 			$sql = mysqli_query($conn, $query);
 			$numrow = mysqli_num_rows($sql);
 
@@ -57,6 +57,9 @@
 					$profile_pic = $row['profile_pic'];
 					$full_name = $row['full_name'];
 					$language = $row['language'];
+					if($language == "" || $language == NULL || !isset($language)){
+						$language = $_COOKIE["language"];
+					}
 					$add_by = $row['add_by'];
 					if ($add_by != 0)
 					{
@@ -70,36 +73,40 @@
 				}
 				if ($u_name == $u_name && $password == $dbpassword)
 				{
+					
 					session_destroy();
-                                        $d = date('Y-m-d H:i:s');
-                                        $sql_last_login = "UPDATE `user` SET `last_login` = '$d' WHERE u_id = '$id'";
-                                        $res = mysqli_query($conn, $sql_last_login);
+					$d = date('Y-m-d H:i:s');
+					$sql_last_login = "UPDATE `user` SET `last_login` = '$d' WHERE u_id = '$id'";
+					$res = mysqli_query($conn, $sql_last_login);
 					session_start();
-					$_SESSION['id'] = $id;
-					$_SESSION['skills'] = "skills_shiksha";
-					$_SESSION['u_name'] = $u_name;
-					$_SESSION['password'] = $password;
-					$_SESSION['language'] = $language;
-					$_SESSION['full_name'] = $full_name;
-					$_SESSION['profile_pic'] = $profile_pic;
-					$_SESSION['add_by'] = $add_by;
-					$_SESSION['vendor_name'] = $vendor_name;
-					$_SESSION['vendor_pic'] = $vendor_pic;
-					$u_name = $_SESSION["u_name"];
-					$uid = $_SESSION["id"];
-					$full_name = $_SESSION["full_name"];
-					$profile_pic = $_SESSION["profile_pic"];
-					$add_by = $_SESSION["add_by"];
-					$vendor_name = $_SESSION["vendor_name"];
-					$vendor_pic = $_SESSION["vendor_pic"];
-					$language = $_SESSION["language"];
+					setcookie("id", $id, time() + (31556926), "/"); // 31556926 = 1 year 
+					setcookie("skills", "skills_shiksha", time() + (31556926), "/");
+					setcookie("u_name", $u_name, time() + (31556926), "/");
+					setcookie("password", $password, time() + (31556926), "/");
+					setcookie("language", $language, time() + (31556926), "/");
+					setcookie("full_name", $full_name, time() + (31556926), "/");
+					setcookie("profile_pic", $profile_pic, time() + (31556926), "/");
+					setcookie("add_by", $add_by, time() + (31556926), "/");
+					setcookie("vendor_name", $vendor_name, time() + (31556926), "/");
+					setcookie("vendor_pic", $vendor_pic, time() + (31556926), "/");
+					
+					
+					$u_name = $_COOKIE["u_name"];
+					$uid = $_COOKIE["id"];
+					$full_name = $_COOKIE["full_name"];
+					$profile_pic = $_COOKIE["profile_pic"];
+					$add_by = $_COOKIE["add_by"];
+					$vendor_name = $_COOKIE["vendor_name"];
+					$vendor_pic = $_COOKIE["vendor_pic"];
+					$language = $_COOKIE["language"];
 					//header("Location: dashboard.php");
+					
 					echo "done";
 				}
 			}
 			break;
 		case 'takecourse':
-			$uid= $_SESSION['id'];
+			$uid= $_COOKIE['id'];
 			
 			$cat_id = $_POST['cat_id'];
 			$sqlVideoWatch = "INSERT INTO `user_course`(`u_id`, `cat_id`, `status`) VALUES ('$uid','$cat_id','Active')";
@@ -213,11 +220,11 @@
 								
 								<p>On AurSeekho, you can take hundreds of courses from the best instructors in your native language. Courses are open to anyone, and are available anytime, anywhere. Join and accomplish your learning goals, and discover what you're capable of today.</p>
 								
-								<p>AurSeekho envisions a world in which anyone, anywhere can transform their life through access to the best education. Weï¿½re here to help you reach your goals, and we canï¿½t wait to see what you achieve!</p>
+								<p>AurSeekho envisions a world in which anyone, anywhere can transform their life through access to the best education. We’re here to help you reach your goals, and we can’t wait to see what you achieve!</p>
 								
 								<p>Your account email is: ".$email." . Use this email address when you login to your AurSeekho account. If you signed up with a social media account, please login using your account credentials. </p>
 								
-								<p>You can download our app ï¿½ Android</p>
+								<p>You can download our app – Android</p>
 								
 								
 								<table>
@@ -254,6 +261,17 @@
 			$full_name = $forgot_res['full_name'];
 			$email = $forgot_res['email'];
 			$password = $forgot_res['password'];
+			
+			$u_id = $forgot_res['u_id'];
+			
+			
+			$token= mt_rand(100000, 999999);
+			$token = md5($token);
+			
+			$queryreset = "UPDATE `user` SET `reset`='$token' WHERE email = '$email'";
+			$sqlreset = mysqli_query($conn, $queryreset);
+			
+			$resetlink = "http://aurseekho.com/reset.php?key=".$token."&action=reset";
 						
 			//email script start
 			include 'library.php'; 
@@ -284,8 +302,8 @@
 										<td>".$email."</td>
 									</tr>
 									<tr>
-										<td>Password:</td>
-										<td>".$password."</td>
+										<td>Password Reset Link:</td>
+										<td>".$resetlink."</td>
 									</tr>
 								</table>
 								
@@ -300,7 +318,7 @@
 					
 				
 			//email script end				
-						
+									
 			echo "done";
 			}
 			else{

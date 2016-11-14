@@ -8,9 +8,9 @@
 	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	
 	
-	if(isset($_SESSION['language']) && !isset($_GET['lan'])){
+	if(isset($_COOKIE['language']) && !isset($_GET['lan'])){
 		#$language = "lan1";
-		$language = $_SESSION["language"];
+		$language = $_COOKIE["language"];
 		
 	}	
 	else
@@ -19,7 +19,7 @@
 	
 		if(isset($_GET['lan'])){
 		$lan = $_GET['lan'];
-		$_SESSION['language'] = $lan;
+		$_COOKIE['language'] = $lan;
 
 		
 
@@ -34,7 +34,7 @@
 		}
 		else
 		{
-			$_SESSION['language'] = "lan2";
+			$_COOKIE['language'] = "lan2";
 			$language = "lan2";
 		}
 	}
@@ -116,9 +116,9 @@
 
             <div class="page-section"  style="padding:5px 0px;">
                 	<div class="col-md-6">
-                    <h1 class="text-display-1 margin-none" style="vertical-align:middle;">My Courses</h1>
+                    <h1 class="text-display-1 margin-none" style="vertical-align:middle; font-size:24px;"><?php echo $mycourse_translate;?> </h1>
              		</div>
-                    <div class="col-md-6 pull-right" style="padding-right:0px;">
+                    <!--<div class="col-md-6 pull-right" style="padding-right:0px;">
 						<form name="frm_searhc" id="frm_search" method="post" action="search.php">
                     <div id="custom-search-input">
                             <div class="input-group col-md-6 pull-right" style="padding-right:0px;">
@@ -132,7 +132,7 @@
                             </div>
                         </div>
 						</form>
-                    </div>
+                    </div>-->
             </div>
 			<!--<div class="page-section">
 
@@ -151,11 +151,13 @@
                 <div class="clearfix margin-v-0-15"></div>
             <div class="row" data-toggle="isotope">
             <?php
-			$uid = $_SESSION['id'];
+			$uid = $_COOKIE['id'];
             $query = "SELECT * FROM user_course AS uc
 									LEFT JOIN courses AS cor ON uc.cat_id = cor.c_id									
 									WHERE u_id = '$uid' ";	
 			$sql = mysqli_query($conn,$query);
+			
+			$my_cor_num = mysqli_num_rows($sql);
 			while($result= mysqli_fetch_array($sql)){
 			
 				$c_id = $result["c_id"];
@@ -175,7 +177,7 @@
 					$vid_num = mysqli_num_rows($sql_vid_num);
 			
 			
-			$uid =$_SESSION['id'];
+			$uid =$_COOKIE['id'];
 			$query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = $uid";	
 			$sql_check_cor = mysqli_query($conn,$query_check_cor);			
 			$check_cor = mysqli_num_rows($sql_check_cor);
@@ -292,7 +294,32 @@
             </div><?php */?>
             <?php
 				}
+				if($my_cor_num == 0){
             ?>
+            <div class="item col-xs-12 col-sm-12 col-lg-12 col-md-12" style="padding-bottom:250px; position:fixed;">
+            <div class="panel panel-default" style="clear:both;">
+                    <div class="media v-middle">
+                      <div class="media-left">
+                        <div class="bg-green-400 text-white">
+                          <div class="panel-body">
+                            <i class="fa fa-credit-card fa-fw fa-2x"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="media-body">
+                          <?php echo $dont_take_cor_translate; ?>
+                      </div>
+                      <!--<div class="media-right media-padding">
+                        <a class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated href="my_courses.php">
+                        Go to My Courses
+                    </a>
+                      </div>-->
+                    </div>
+                  </div>
+            </div>
+            <?php
+            	}
+			?>
           </div>
 
             <br/>

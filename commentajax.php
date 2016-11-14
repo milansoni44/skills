@@ -3,9 +3,9 @@ session_start();
 include('config.php');
 if($_POST)
 {
-$uid = $_SESSION["id"];
-$full_name = $_SESSION["full_name"];
-$profile_pic = $_SESSION["profile_pic"];
+$uid = $_COOKIE["id"];
+$full_name = $_COOKIE["full_name"];
+$profile_pic = $_COOKIE["profile_pic"];
 $comment=$_POST['comment'];
 $v_id=$_POST['video_id'];
 

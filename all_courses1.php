@@ -4,15 +4,15 @@
 ?>
 <?php
 	$pagename =  basename($_SERVER['PHP_SELF']);
-	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-	
+	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";	
 	
 	
 	
 	if(isset($_GET['lan'])){
 	$lan = $_GET['lan'];
-	$_SESSION['language'] = $lan;
-	$language = $_SESSION["language"];
+	//$_COOKIE['language'] = $lan;
+	setcookie("language", $lan, time() + (31556926), "/");
+	$language = $_COOKIE["language"];
 	$actual_link = str_replace("?lan=lan1","",$actual_link);
 	$actual_link = str_replace("?lan=lan2","",$actual_link);
 	$actual_link = str_replace("?lan=lan3","",$actual_link);

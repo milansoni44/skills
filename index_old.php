@@ -8,16 +8,16 @@
 	
 	
 	session_start();
-	$language = $_SESSION["language"];
-	if(!isset($_SESSION['language'])){
+	$language = $_COOKIE["language"];
+	if(!isset($_COOKIE['language'])){
 		$language = "lan2";
 	}
 	
 	
 	if(isset($_GET['lan'])){
 	$lan = $_GET['lan'];
-	$_SESSION['language'] = $lan;
-	$language = $_SESSION["language"];
+	$_COOKIE['language'] = $lan;
+	$language = $_COOKIE["language"];
 	$actual_link = str_replace("?lan=lan1","",$actual_link);
 	$actual_link = str_replace("?lan=lan2","",$actual_link);
 	$actual_link = str_replace("?lan=lan3","",$actual_link);
@@ -31,7 +31,7 @@
 	if(isset($_POST['lan_redirect'])){
 	
 	$lan_choosen = $_POST["lan_choosen"];
-	$_SESSION['language'] = $lan_choosen;
+	$_COOKIE['language'] = $lan_choosen;
 	$link_redirect = $_POST["link_redirect"];
 	header("location:".$link_redirect);
 	}
@@ -125,12 +125,12 @@
             </li>
             <!-- // END user -->
 			<?php
-	if (isset($_SESSION['skills']))
+	if (isset($_COOKIE['skills']))
 	{
 		?>
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-											<img src="images/profile/<?php echo $_SESSION["profile_pic"]; ?>" alt="<?php echo $_SESSION["full_name"]; ?> " class="img-circle" width="40"/> <?php echo $_SESSION["u_name"]; ?> <span class="caret"></span>
+											<img src="images/profile/<?php echo $_COOKIE["profile_pic"]; ?>" alt="<?php echo $_COOKIE["full_name"]; ?> " class="img-circle" width="40"/> <?php echo $_COOKIE["u_name"]; ?> <span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu" role="menu" style="margin-top: 64px; height: auto; display: none; overflow: visible; top: 100%; opacity: 0;">
 											<li class="active"><a href="dashboard.php"><i class="fa fa-bar-chart-o"></i> Dashboard</a></li>
@@ -364,7 +364,7 @@
                   <div class="panel-body" align="center">
 
                     <?php
-                    if (!isset($_SESSION['skills']))
+                    if (!isset($_COOKIE['skills']))
                     {
 					?>
                     <button class="btn btn-deep-orange-500 btn-flat paper-shadow relative linkget" value='<?php echo $link;?>' onClick="f1(this)"  >Go to course</button>

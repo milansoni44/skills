@@ -1,24 +1,29 @@
 <?php
 
-	ob_start();
-	session_start();
-	if(!isset($_SESSION['skills'])){
-		header("location:login.php");
+//	session_start();
+	if(!isset($_COOKIE['skills'])){
+	    echo"
+	    <script>
+	    window.location.href='logout.php';
+        </script>";
+//        header("location:logout.php");
+//	    header("location:logout.php");
+        exit;
 	}
 
-	if(isset($_SESSION['skills'])){
-		$u_name = $_SESSION["u_name"];
-		$uid = $_SESSION["id"];
-		$full_name = $_SESSION["full_name"];
-		$profile_pic = $_SESSION["profile_pic"];
-		$add_by = $_SESSION["add_by"];
-		$vendor_name = $_SESSION["vendor_name"];
-		$vendor_pic = $_SESSION["vendor_pic"];
+	if(isset($_COOKIE['skills'])){
+		$u_name = $_COOKIE["u_name"];
+		$uid = $_COOKIE["id"];
+		$full_name = $_COOKIE["full_name"];
+		$profile_pic = $_COOKIE["profile_pic"];
+		$add_by = $_COOKIE["add_by"];
+		$vendor_name = $_COOKIE["vendor_name"];
+		$vendor_pic = $_COOKIE["vendor_pic"];
 
-		$language = $_SESSION["language"];
-		if(!isset($_SESSION['language'])){
+		$language = $_COOKIE["language"];
+		if(!isset($_COOKIE['language'])){
 			$language = "lan2";
 		}	
-	}		
-	ob_end_flush();
+	}
+
 ?>

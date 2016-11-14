@@ -24,15 +24,15 @@ $sql_num = mysqli_num_rows($sql);
 			
 			session_destroy();
 			session_start();
-			$_SESSION['id'] = $insert_id;
-			$_SESSION['skills'] = "skills_shiksha";
-			$_SESSION['u_name'] = $email;
-			$_SESSION['password'] = $password;
-			$_SESSION['full_name'] = $full_name;
+			$_COOKIE['id'] = $insert_id;
+			$_COOKIE['skills'] = "skills_shiksha";
+			$_COOKIE['u_name'] = $email;
+			$_COOKIE['password'] = $password;
+			$_COOKIE['full_name'] = $full_name;
 			
-			$u_name = $_SESSION["u_name"];
-			$uid = $_SESSION["id"];
-			$full_name = $_SESSION["full_name"];
+			$u_name = $_COOKIE["u_name"];
+			$uid = $_COOKIE["id"];
+			$full_name = $_COOKIE["full_name"];
 			
 			echo  "<script> 
 						alert('Congratulations! Your account is successfully activated.');

@@ -1,7 +1,33 @@
 <?php include("header.php"); ?>
 
 <div class="container">
+    <?php 
+        $total_users = "SELECT u_id FROM user WHERE add_by = '$uid'";
+        $result_users = mysqli_query($conn, $total_users);
+        if(mysqli_num_rows($result_users) > 0){
+            while($row_users = mysqli_fetch_object($result_users)){
+                $learning_hours = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(`video`.`v_duration`))) AS total_hours FROM video_view LEFT JOIN video ON video.v_id = video_view.v_id WHERE u_id = '".$row_users->u_id."' GROUP BY u_id";
+                $result_hours = mysqli_query($conn, $learning_hours);
+                $row_hours[] = mysqli_fetch_object($result_hours)->total_hours;
+            }
+        }
+//        echo "<pre>";
+//        print_r($row_hours);
+//        echo "</pre>";
+        $seconds = 0;
+        $temp_hours = array_filter($row_hours);
+        if(!empty($temp_hours)){
+            foreach($temp_hours as $tot_h){
+                $timestr = $tot_h;
 
+                $parts = explode(':', $timestr);
+
+                $seconds += ($parts[0] * 60 * 60) + ($parts[1] * 60) + $parts[2];
+            }
+        }
+        $t = round($seconds);
+        echo "<button class='btn btn-sq-sm btn-primary' style='float:right;'>".sprintf('%02d:%02d:%02d', ($t/3600),($t/60%60), $t%60)."</button>";
+    ?>
     <div class="page-section" style="padding-bottom: 0px;">
         <div class="row">
             <div class="col-lg-2 col-md-2">
@@ -13,8 +39,6 @@
                             </div>
                         </div>
                         <h3 class="panel-title">Users</h3>
-<!--                        <p></p>
-                        <p>Add, Update And manage users</p>-->
                     </a>
                 </div>
             </div>
@@ -27,8 +51,6 @@
                             </div>
                         </div>
                         <h3 class="panel-title">Organisation Profile</h3>
-<!--                        <p></p>
-                        <p>Update information about organisation</p>-->
                     </a>
                 </div>
             </div>
@@ -41,9 +63,7 @@
                             </div>
                         </div>
                         <h3 class="panel-title">Billing</h3>
-<!--                        <p></p>
-                        <p>License Used : <?php echo $used."/".$ulimit;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valid Up to : <?php echo  date("d-m-Y", strtotime($uvalidity));?></p>-->
-                    </a>
+                   </a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-2">
@@ -55,8 +75,6 @@
                             </div>
                         </div>
                         <h3 class="panel-title">Reports</h3>
-<!--                        <p></p>
-                        <p>Track usage of services</p>-->
                     </a>
                 </div>
             </div>
@@ -69,8 +87,6 @@
                             </div>
                         </div>
                         <h3 class="panel-title">Enforce Course</h3>
-<!--                        <p></p>
-                        <p></p>-->
                     </a>
                 </div>
             </div>
@@ -83,8 +99,6 @@
                             </div>
                         </div>
                         <h3 class="panel-title">User groups</h3>
-<!--                        <p></p>
-                        <p></p>-->
                     </a>
                 </div>
             </div>
@@ -97,8 +111,6 @@
                             </div>
                         </div>
                         <h3 class="panel-title">Device Management</h3>
-<!--                        <p></p>
-                        <p></p>-->
                     </a>
                 </div>
             </div>
@@ -111,78 +123,9 @@
                             </div>
                         </div>
                         <h3 class="panel-title">Support</h3>
-<!--                        <p></p>
-                        <p></p>-->
                     </a>
                 </div>
             </div>
-<!--            <div class="col-lg-3 col-md-6">
-                <a href="./profile.php">
-                <div class="panel panel-green">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-sitemap fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                                                        <div class="huge">12</div>
-                                <div>Organization Profile</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                </a>
-            </div>-->
-<!--            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-yellow">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-shopping-cart fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">License Used : <?php echo $used."/".$ulimit;?></div>
-                                <div>Valid Up to : <?php echo  date("d-m-Y", strtotime($uvalidity));?></div>
-                                <div>Billing</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>-->
-<!--            <div class="col-lg-3 col-md-6">
-                <a href="./reports.php">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-flag-checkered fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">13</div>
-                                <div>Reports</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                </a>
-            </div>-->
         </div>
     </div>
     

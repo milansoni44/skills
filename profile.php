@@ -1,4 +1,5 @@
 <?php include("header.php");
+      include("checklogin.php");
 
 
 if(isset($_POST['submit_user'])){
@@ -14,12 +15,13 @@ if(isset($_POST['submit_user'])){
 	$occupation = $_POST["occupation"];
 	$phone = $_POST["phone"];
 	$profile_pic = $_FILES['profile_pic']['name'];
-	$u_id = $_SESSION['id'];
+	$u_id = $_COOKIE['id'];
 	
 	$query_user ="UPDATE `user` SET `full_name`='$full_name',`email`='$email',`mobile`='$mobile',`dob`='$dob',`state`='$state',`country`='$country',`education`='$education',`occupation`='$occupation',`phone`='$phone', ";	
 	
 	if($profile_pic != ""){
-		$_SESSION['profile_pic'] = $profile_pic;
+		//$_COOKIE['profile_pic'] = $profile_pic;
+		setcookie("profile_pic", $profile_pic, time() + (31556926), "/");
 		$path = "images/profile/".$profile_pic;	
 			move_uploaded_file($_FILES["profile_pic"]["tmp_name"],$path);
 		  $query_user .= "`profile_pic`='$profile_pic', ";	
@@ -65,7 +67,7 @@ if(isset($_POST['submit_user'])){
 
               <div id="account" class="tab-pane active">
                 <?php 
-				$uid = $_SESSION['id'];
+				$uid = $_COOKIE['id'];
 				$user_det = "SELECT * FROM user WHERE u_id = '$uid'";
 				$query_user_det = mysqli_query($conn,$user_det);
 				$user_res = mysqli_fetch_array($query_user_det);
@@ -90,7 +92,7 @@ if(isset($_POST['submit_user'])){
                       <div class="media v-middle">
                         <div class="media-left">
                           <div class="icon-block width-100 bg-grey-100">
-                            <img  src="images/profile/<?php echo $_SESSION["profile_pic"]; ?>" alt="" width="100" />
+                            <img  src="images/profile/<?php echo $_COOKIE["profile_pic"]; ?>" alt="" width="100" />
                           </div>
                         </div>
                         <div class="media-body">
@@ -289,9 +291,10 @@ if(isset($_POST['submit_user'])){
             </div>
             <div class="panel-body list-group">
               <ul class="list-group list-group-menu">
-                <li class="list-group-item"><a class="link-text-color" href="dashboard.php">Dashboard</a></li>
-                <li class="list-group-item active"><a class="link-text-color" href="profile.php">Profile</a></li>
-                <li class="list-group-item"><a class="link-text-color" href="logout.php"><span>Logout</span></a></li>
+                <li class="list-group-item"><a class="link-text-color" href="dashboard.php"><?php echo $dashboard_translate;?></a></li>
+                <li class="list-group-item active"><a class="link-text-color" href="profile.php"> <?php echo $proile_translate;?></a></li>
+                <li class="list-group-item"><a class="link-text-color" href="change_password.php"><?php echo $change_password_translate;?></a></li>
+                <li class="list-group-item"><a class="link-text-color" href="logout.php"><span><?php echo $logout_translate;?></span></a></li>
               </ul>
             </div>
           </div>

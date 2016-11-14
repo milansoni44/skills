@@ -7,7 +7,7 @@ if (isset($_POST['rate']) && !empty($_POST['rate'])) {
 
     $rate = $conn->real_escape_string($_POST['rate']);
 	$cat_id = $conn->real_escape_string($_POST['cat_id']);
-	$uid =$_SESSION['id'];
+	$uid =$_COOKIE['id'];
 // check if user has already rated
     $sql = "SELECT `ur_id` FROM `rating` WHERE `u_id`='$uid' AND cat_id = '$cat_id'";
     $result = $conn->query($sql);

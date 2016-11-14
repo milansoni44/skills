@@ -84,7 +84,7 @@ $key = $_GET['key'];
 
 	$query = "SELECT * FROM `user` WHERE `reset`='".$_GET['key']."'";
 	$sql = mysqli_query($conn,$query);
-	echo $sql_num = mysqli_num_rows($sql);
+	$sql_num = mysqli_num_rows($sql);
 	$result = mysqli_fetch_array($sql);
 	
 	$full_name = $result['full_name'];

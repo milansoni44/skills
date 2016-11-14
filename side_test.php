@@ -10,8 +10,8 @@
 	
 	if(isset($_GET['lan'])){
 	$lan = $_GET['lan'];
-	$_SESSION['language'] = $lan;
-	$language = $_SESSION["language"];
+	$_COOKIE['language'] = $lan;
+	$language = $_COOKIE["language"];
 	$actual_link = str_replace("?lan=lan1","",$actual_link);
 	$actual_link = str_replace("?lan=lan2","",$actual_link);
 	$actual_link = str_replace("?lan=lan3","",$actual_link);

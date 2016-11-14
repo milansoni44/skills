@@ -1,5 +1,13 @@
-<?php
+<?php	
+	if(isset($_COOKIE['skills'])){
+	?>
+    <script>
+	window.location.href='dashboard.php';
+	</script>
+    <?php //header("location:dashboard.php");
+	}
 	include("header.php");
+	
 ?>
 
   <div class="parallax cover overlay cover-image-full home" id="home">
@@ -15,8 +23,20 @@
   <br>
   <div class="container" id="features">
     <div class="page-section-heading">
-      <h2 class="text-display-1">Features</h2>
-      <p class="lead text-muted">Learn about all of the features we offer.</p>
+      <?php
+      //Feature Head
+		$query_trans = "SELECT * FROM website_translate WHERE key_value = 'feature_head'";
+		$sql_trans = mysqli_query($conn,$query_trans);
+		$result_trans = mysqli_fetch_array($sql_trans);
+		$feature_head = $result_trans[$language];
+		
+	  //Feature Head Text
+		$query_trans = "SELECT * FROM website_translate WHERE key_value = 'feature_head_text'";
+		$sql_trans = mysqli_query($conn,$query_trans);
+		$result_trans = mysqli_fetch_array($sql_trans);
+		$feature_head_text = $result_trans[$language];
+	  ?>
+      <h2 class="text-display-1"><?php echo $feature_head;?></h2>
     </div>
     <div class="row" data-toggle="gridalicious">
 
@@ -68,8 +88,20 @@
   <br>
 <div class="container">
 	<div class="page-section-heading">
-      <h2 class="text-display-1">Browse Our Top Courses</h2>
-      <p class="lead text-muted">Learn about all of the feature Courses we offer.</p>
+    	<?php
+        //Brows Head head
+		$query_trans = "SELECT * FROM website_translate WHERE key_value = 'browse_cor_head'";
+		$sql_trans = mysqli_query($conn,$query_trans);
+		$result_trans = mysqli_fetch_array($sql_trans);
+		$browse_cor_head = $result_trans[$language];
+		
+		//Brows Head Text
+		$query_trans = "SELECT * FROM website_translate WHERE key_value = 'browse_cor_text'";
+		$sql_trans = mysqli_query($conn,$query_trans);
+		$result_trans = mysqli_fetch_array($sql_trans);
+		$browse_cor_text = $result_trans[$language];
+		?>
+      <h2 class="text-display-1"><?php echo $browse_cor_head;?></h2>
     </div>
     <div class="row">
 		<div class="col-md-12">
@@ -120,12 +152,12 @@
 					
 					
 					$c_id = $result["c_id"];
-					$c_name_str = "c_name_".$language; 
-					$c_name = $result[$c_name_str];
+					$c_name_str = "c_name_".$language;
+                    $c_name = $result[$c_name_str];
 					$c_icon = $result["c_icon"];
 				
 				
-				$query_num = "SELECT * FROM `courses` where p_id = '$c_id' ";	
+				$query_num = "SELECT * FROM `courses` where p_id = '$c_id' ";
 				$sql_num = mysqli_query($conn,$query_num);
 				$cor_num = mysqli_num_rows($sql_num);
 				?>
@@ -172,9 +204,9 @@
                   <hr class="margin-none" />
                   <div class="panel-body" align="center">
 
-                    <button class="btn btn-deep-orange-500 btn-flat paper-shadow relative" onClick="window.location='<?php echo $link;?>'" >Go to course</button>
+                    <button class="btn btn-deep-orange-500 btn-flat paper-shadow relative" onClick="window.location='<?php echo $link;?>'" ><?php echo $go_to_cat_translate; ?></button>
 					<?php /*?><?php
-                    if (!isset($_SESSION['skills']))
+                    if (!isset($_COOKIE['skills']))
                     {
 					?>
                     <button class="btn btn-deep-orange-500 btn-flat paper-shadow relative linkget" value='<?php echo $link;?>' onClick="f1(this)"  >Go to course</button>
@@ -392,7 +424,7 @@
     var $j = jQuery.noConflict();
     $j(document).ready(function(){
 		<?php
-		if(!isset($_SESSION['language'])){
+		if(!isset($_COOKIE['language'])){
 		
 		?>        
 		$('#modal_first').modal({

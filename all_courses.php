@@ -8,8 +8,9 @@
 	
 	if(isset($_GET['lan'])){
 	$lan = $_GET['lan'];
-	$_SESSION['language'] = $lan;
-	$language = $_SESSION["language"];
+	//$_COOKIE['language'] = $lan;
+	setcookie("language", $lan, time() + (31556926), "/");
+	$language = $_COOKIE["language"];
 	$actual_link = str_replace("?lan=lan1","",$actual_link);
 	$actual_link = str_replace("?lan=lan2","",$actual_link);
 	$actual_link = str_replace("?lan=lan3","",$actual_link);
@@ -23,7 +24,8 @@
 	if(isset($_POST['lan_redirect'])){
 	
 	$lan_choosen = $_POST["lan_choosen"];
-	$_SESSION['language'] = $lan_choosen;
+	//$_COOKIE['language'] = $lan_choosen;
+	setcookie("language", $lan_choosen, time() + (31556926), "/");
 	$link_redirect = $_POST["link_redirect"];
 	header("location:".$link_redirect);
 	}
@@ -130,7 +132,7 @@
                   <div class="panel-body" align="center">
 
                     <?php
-                    if (!isset($_SESSION['skills']))
+                    if (!isset($_COOKIE['skills']))
                     {
 					?>
                     <button class="btn btn-deep-orange-500 btn-flat paper-shadow relative linkget" value='<?php echo $link;?>' onClick="f1(this)"  >Go to course</button>

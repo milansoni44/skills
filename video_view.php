@@ -6,8 +6,8 @@
 	
 	$vid_id = $_POST["v_id"];
 	
-	if(isset($_SESSION['id'])){
-	$uid= $_SESSION['id'];
+	if(isset($_COOKIE['id'])){
+	$uid= $_COOKIE['id'];
 	$query1 = "SELECT * FROM `video` where v_id = '$vid_id' ";		
 	$sql1 = mysqli_query($conn,$query1);
 	$result1= mysqli_fetch_array($sql1);

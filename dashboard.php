@@ -1,4 +1,4 @@
-<?php 
+<?php
     include("header.php");
 	include("checklogin.php");
 
@@ -7,21 +7,21 @@
   <!-- Fixed navbar -->
 
 
-  <div class="parallax overflow-hidden bg-blue-400 page-section third">
+  <div class="overflow-hidden bg-blue-400 page-section third">
     <div class="container parallax-layer" data-opacity="true">
       <div class="media v-middle">
         <div class="media-left text-center">
           <a href="#">
           	<?php
-				$ven_image = "images/profile/".$_SESSION["vendor_pic"];
-				if(!file_exists($ven_image) || !isset($_SESSION['vendor_pic'])){
+				$ven_image = "images/profile/".$_COOKIE["vendor_pic"];
+				if(!file_exists($ven_image) || !isset($_COOKIE['vendor_pic'])){
 				$ven_image = "images/user_place.png";
 				}
-				if($ven_image == "images/profile/" || !isset($_SESSION['vendor_pic'])){
+				if($ven_image == "images/profile/" || !isset($_COOKIE['vendor_pic'])){
 				$ven_image = "images/user_place.png";
 				}
 			?>
-            <img src="<?php echo $ven_image;?>" alt="people" class="img-circle width-80" height="80" width="80" />
+            <img src="<?php echo $ven_image;?>" alt="people" class="width-80" height="80" width="80" />
           </a>
         </div>
         <div class="media-body">
@@ -42,13 +42,13 @@
             <div class="page-section">
               <div class="media v-middle">
                 <div class="media-body">
-                  <h1 class="text-display-1 margin-none">My Course</h1>
+                  <h1 class="text-display-1 margin-none" style="font-size:24px;"><?php echo $mycourse_translate;?> </h1>
                   <!--<p class="text-subhead">Browse through thousands of lessons.</p>-->
                 </div>
                 <div class="media-right">
-                  <div class="width-100 text-right">
+                  <div class="width-150 text-center">
                     <div class="btn-group">
-                      <a class="btn btn-grey-800" href="my_courses.php"><i class="">See All</i></a>
+                      <a class="btn btn-grey-800" href="my_courses.php"><i class=""><?php echo $see_all_translate;?></i></a>
                     </div>
                   </div>
                 </div>
@@ -57,7 +57,7 @@
 
             <div class="row" data-toggle="isotope">
               <?php
-			$uid = $_SESSION['id'];
+			$uid = $_COOKIE['id'];
             $query = "SELECT * FROM user_course AS uc
 									LEFT JOIN courses AS cor ON uc.cat_id = cor.c_id									
 									WHERE u_id = '$uid' limit 4";	
@@ -89,8 +89,8 @@
 					}
 			
 			
-			$uid =$_SESSION['id'];
-			$query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = $uid";	
+			$uid =$_COOKIE['id'];
+			$query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = '$uid'";	
 			$sql_check_cor = mysqli_query($conn,$query_check_cor);			
 			$check_cor = mysqli_num_rows($sql_check_cor);
 			
@@ -194,7 +194,7 @@
                         </div>
                       </div>
                       <div class="media-body">
-                        You Don't Have Take any courses.
+                          <?php echo $dont_take_cor_translate; ?>
                       </div>
                       <!--<div class="media-right media-padding">
                         <a class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated href="my_courses.php">
@@ -220,13 +220,13 @@
                     <div class="page-section">
                       <div class="media v-middle">
                         <div class="media-body">
-                          <h1 class="text-display-1 margin-none">Recommended</h1>
+                          <h1 class="text-display-1 margin-none"  style="font-size:24px;"><?php echo $recomnded_translate;?></h1>
                           <!--<p class="text-subhead">Browse through thousands of lessons.</p>-->
                         </div>
                         <div class="media-right">
-                          <div class="width-100 text-right">
+                          <div class="width-150 text-center">
                             <div class="btn-group">
-                              <a class="btn btn-grey-800" href="all_courses.php"><i class="">See All</i></a>
+                              <a class="btn btn-grey-800" href="all_courses.php"><i class=""><?php echo $see_all_translate;?></i></a>
                             </div>
                           </div>
                         </div>
@@ -235,13 +235,29 @@
         
                     <div class="row" data-toggle="isotope">
                     <?php
-                    $query = "SELECT * FROM `courses` AS cor  
-                                LEFT JOIN user_course AS uc ON cor.c_id = uc.cat_id 
-                                WHERE p_id != '0' 
+					$uid =$_COOKIE['id'];
+                  	
+					$qu = "select cat_id from user_course where u_id = '$uid'";
+					$qu_sl = mysqli_query($conn,$qu);
+					//$qures1 = mysqli_fetch_array($qu_sl);
+					$data_list = array();
+					$data_det = array();
+					while($qures = mysqli_fetch_assoc($qu_sl)){
+					//echo $qures['cat_id'];
+					/*$data_det["cat_id"] = $qures['cat_id'];
+					array_push($data_list, $data_det);*/
+						$cat_arr[] = $qures['cat_id'];
+					}
+					/*echo "<pre>";
+					print_r($cat_arr);
+					echo "</pre>";*/
+					$cat_not_in = implode(",",$cat_arr);
+					
+				   $query = "SELECT * FROM `courses` WHERE c_id NOT IN ( $cat_not_in )  AND p_id != '0'
                                 GROUP BY c_id  
-                                ORDER BY u_id
                                 LIMIT 4";	
-                    $sql = mysqli_query($conn,$query);
+              
+					$sql = mysqli_query($conn,$query);
                     while($result= mysqli_fetch_array($sql)){
                     
                         $c_id = $result["c_id"];
@@ -258,7 +274,7 @@
 					}
                     
                     
-                    $uid =$_SESSION['id'];
+                    $uid =$_COOKIE['id'];
                     $query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = $uid";	
                     $sql_check_cor = mysqli_query($conn,$query_check_cor);			
                     $check_cor = mysqli_num_rows($sql_check_cor);
@@ -317,7 +333,7 @@
         
                           </div>
                           <div class="panel-body">
-                              <p class="text-headline margin-v-0-10"><a href="syllabus.php?c_id=<?php echo $c_id;?>" style="font-size:20px;"><?php echo $c_name; ?></a></p>
+                              <p class="text-headline margin-v-0-10"><a href="syllabus.php?c_id=<?php echo $c_id;?>" style="font-size:14px;"><?php echo $c_name; ?></a></p>
         
                             <p class="small margin-none">
                               <span class="fa fa-fw fa-star<?php if($total_rate < 1){echo "-o";}?> text-orange-800"></span>
@@ -367,13 +383,13 @@
                     <div class="page-section">
                       <div class="media v-middle">
                         <div class="media-body">
-                          <h1 class="text-display-1 margin-none">New Course</h1>
+                          <h1 class="text-display-1 margin-none"  style="font-size:24px;"><?php echo $new_course_translate_translate;?></h1>
                           <!--<p class="text-subhead">Browse through thousands of lessons.</p>-->
                         </div>
                         <div class="media-right">
-                          <div class="width-100 text-right">
+                          <div class="width-150 text-center">
                             <div class="btn-group">
-                              <a class="btn btn-grey-800" href="all_courses.php"><i class="">See All</i></a>
+                              <a class="btn btn-grey-800" href="all_courses.php"><i class=""><?php echo $see_all_translate;?></i></a>
                             </div>
                           </div>
                         </div>
@@ -400,7 +416,7 @@
 					}
                     
                     
-                    $uid =$_SESSION['id'];
+                    $uid =$_COOKIE['id'];
                     $query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = $uid";	
                     $sql_check_cor = mysqli_query($conn,$query_check_cor);			
                     $check_cor = mysqli_num_rows($sql_check_cor);
@@ -459,7 +475,7 @@
         
                           </div>
                           <div class="panel-body">
-                              <p class="text-headline margin-v-0-10"><a href="syllabus.php?c_id=<?php echo $c_id;?>" style="font-size:20px;"><?php echo $c_name; ?></a></p>
+                              <p class="text-headline margin-v-0-10"><a href="syllabus.php?c_id=<?php echo $c_id;?>" style="font-size:14px;"><?php echo $c_name; ?></a></p>
         
                             <p class="small margin-none">
                               <span class="fa fa-fw fa-star<?php if($total_rate < 1){echo "-o";}?> text-orange-800"></span>
@@ -531,13 +547,13 @@
             <div class="page-section">
               <div class="media v-middle">
                 <div class="media-body">
-                  <h1 class="text-display-1 margin-none">My Completed Course</h1>
+                  <h1 class="text-display-1 margin-none"  style="font-size:24px;"><?php echo $completed_course_translate;?></h1>
                   <!--<p class="text-subhead">Browse through thousands of lessons.</p>-->
                 </div>
                 <div class="media-right">
-                  <div class="width-100 text-right">
+                  <div class="width-150 text-center">
                     <div class="btn-group">
-                      <a class="btn btn-grey-800" href="my_complete_courses.php"><i class="">See All</i></a>
+                      <a class="btn btn-grey-800" href="my_complete_courses.php"><i class=""><?php echo $see_all_translate;?></i></a>
                     </div>
                   </div>
                 </div>
@@ -567,7 +583,7 @@
 			}
 			
 			
-			$uid =$_SESSION['id'];
+			$uid =$_COOKIE['id'];
 			$query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = $uid";	
 			$sql_check_cor = mysqli_query($conn,$query_check_cor);			
 			$check_cor = mysqli_num_rows($sql_check_cor);
@@ -623,7 +639,7 @@
 
                   </div>
                   <div class="panel-body">
-					  <p class="text-headline margin-v-0-10"><a href="syllabus.php?c_id=<?php echo $c_id;?>" style="font-size:20px;"><?php echo $c_name; ?></a></p>
+					  <p class="text-headline margin-v-0-10"><a href="syllabus.php?c_id=<?php echo $c_id;?>" style="font-size:14px;"><?php echo $c_name; ?></a></p>
 
 					<p class="small margin-none">
                       <span class="fa fa-fw fa-star<?php if($total_rate < 1){echo "-o";}?> text-orange-800"></span>
@@ -652,7 +668,7 @@
                         </div>
                       </div>
                       <div class="media-body">
-                        You Don't Have completed any courses.
+                        <?php echo $completed_course_notiication_translate;?>
                       </div>
                       <!--<div class="media-right media-padding">
                         <a class="btn btn-white paper-shadow relative" data-z="0.5" data-hover-z="1" data-animated href="my_courses.php">

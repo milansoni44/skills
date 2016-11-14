@@ -8,9 +8,9 @@
 	$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 	
 	
-	if(isset($_SESSION['language']) && !isset($_GET['lan'])){
+	if(isset($_COOKIE['language']) && !isset($_GET['lan'])){
 		#$language = "lan1";
-		$language = $_SESSION["language"];
+		$language = $_COOKIE["language"];
 		
 	}	
 	else
@@ -19,7 +19,7 @@
 	
 		if(isset($_GET['lan'])){
 		$lan = $_GET['lan'];
-		$_SESSION['language'] = $lan;
+		$_COOKIE['language'] = $lan;
 
 		
 
@@ -34,7 +34,7 @@
 		}
 		else
 		{
-			$_SESSION['language'] = "lan2";
+			$_COOKIE['language'] = "lan2";
 		}
 	}
 	

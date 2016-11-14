@@ -12,8 +12,8 @@
 	
 	if(isset($_GET['lan'])){
 	$lan = $_GET['lan'];
-	$_SESSION['language'] = $lan;
-	$language = $_SESSION["language"];
+	$_COOKIE['language'] = $lan;
+	$language = $_COOKIE["language"];
 	$actual_link = str_replace("?lan=lan1","",$actual_link);
 	$actual_link = str_replace("?lan=lan2","",$actual_link);
 	$actual_link = str_replace("?lan=lan3","",$actual_link);
@@ -69,7 +69,7 @@
   </div>
 
    <?php 
-	$uid = $_SESSION['id'];
+	$uid = $_COOKIE['id'];
 	$user_det = "SELECT * FROM user WHERE u_id = '$uid'";
 	$query_user_det = mysqli_query($conn,$user_det);
 	$user_res = mysqli_fetch_array($query_user_det);
@@ -119,7 +119,7 @@
                 </div>
                 <div class="row" data-toggle="isotope">
             <?php
-			$uid = $_SESSION['id'];
+			$uid = $_COOKIE['id'];
             $query = "SELECT * FROM user_course AS uc
 									LEFT JOIN courses AS cor ON uc.cat_id = cor.c_id									
 									WHERE u_id = '$uid' ";	
@@ -143,7 +143,7 @@
 					$vid_num = mysqli_num_rows($sql_vid_num);
 			
 			
-			$uid =$_SESSION['id'];
+			$uid =$_COOKIE['id'];
 			$query_check_cor = "SELECT * FROM `user_course` where cat_id = '$c_id' AND u_id = $uid";	
 			$sql_check_cor = mysqli_query($conn,$query_check_cor);			
 			$check_cor = mysqli_num_rows($sql_check_cor);
@@ -248,7 +248,7 @@
 					while($user_res = mysqli_fetch_array($query_user_det)){
 					
 					$c_id = $user_res["c_id"];
-					$c_name_str = "c_name_".$_SESSION['language']; 
+					$c_name_str = "c_name_".$_COOKIE['language']; 
 					$c_name = $user_res[$c_name_str];
 					
 					$sqlVideoWatch = "SELECT *,count(video_view.v_id) as count FROM video_view join video on video_view.v_id = video.v_id where video_view.u_id='".$uid."' and video.cat_id = '$c_id'";	
@@ -302,7 +302,7 @@
 					$v_id = $user_res["v_id"];
 					$comment = $user_res["comment"];
 					$c_id = $user_res["c_id"];
-					$c_name_str = "c_name_".$_SESSION['language']; 
+					$c_name_str = "c_name_".$_COOKIE['language']; 
 					$c_name = $user_res[$c_name_str];
 					
 					

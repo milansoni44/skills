@@ -10,15 +10,21 @@
 	
 	
 	session_start();
-	$language = $_SESSION["language"];
-	if(!isset($_SESSION['language'])){
+    if(isset($_COOKIE['admin'])){
+        header("location:logout.php");
+    }
+	$language = $_COOKIE["language"];
+	if(!isset($_COOKIE['language'])){
 		$language = "lan2";
 	}
 	
 	if(isset($_GET['lan'])){
 	$lan = $_GET['lan'];
-	$_SESSION['language'] = $lan;
-	$language = $_SESSION["language"];
+	//$_COOKIE['language'] = $lan;
+	//setcookie('language', '', time()-3600);
+	setcookie("language", $lan, time() + (31556926), "/");
+	$language = $_COOKIE["language"];
+	
 	$actual_link = str_replace("&lan=lan1", "", $actual_link);
 	$actual_link = str_replace("&lan=lan2", "", $actual_link);
 	$actual_link = str_replace("&lan=lan3", "", $actual_link);
@@ -33,14 +39,17 @@
 	$actual_link = str_replace("?lan=lan6", "", $actual_link);
 	
 	header("location:".$actual_link);
+        exit;
 	}
 	
 	if(isset($_POST['lan_redirect'])){
 	
 	$lan_choosen = $_POST["lan_choosen"];
-	$_SESSION['language'] = $lan_choosen;
+	setcookie('language', '', time()-3600);
+	setcookie("language", $lan_choosen, time() + (31556926), "/");
 	$link_redirect = $_POST["link_redirect"];
 	header("location:".$link_redirect);
+        exit;
 	}
 	
 	#type head start
@@ -155,6 +164,7 @@ background: #428bca;
 }
 .typeahead {
 	background-color: #FFFFFF;
+	color:#000000;
 }
 .typeahead:focus {
 	border: 2px solid #0097CF;
@@ -199,13 +209,7 @@ background: #428bca;
 }
 </style>
 <?php
-if($website_name == "aurseekho.com"){
 include("google_analytic_aurseekho.php");
-}
-if($website_name == "learning-delight.com"){
-include("google_analytic_learning.php");
-}
-
 ?>
 
 
@@ -224,7 +228,7 @@ include("google_analytic_learning.php");
           <span class="icon-bar"></span>
         </button>
         <div class="navbar-brand navbar-brand-logo">			
-            <a href="<?php if (isset($_SESSION['skills'])){ echo "dashboard.php";} else{ echo "index.php";}?>">
+            <a href="<?php if (isset($_COOKIE['skills'])){ echo "dashboard.php";} else{ echo "index.php";}?>">
             <img src="images/logo.png"  height="70" />
           </a>
         </div>
@@ -258,7 +262,7 @@ include("google_analytic_learning.php");
           <li style="width:250px;">
             	<form name="frm_searhc" id="frm_search" method="get" action="search.php" style="margin-top:20px;">
                 <span class="col-md-10 col-sm-8 col-xs-8 col-lg-10" style="padding-right:0;">
-                	<input type="text" name="srch" class="typeahead tt-query search-query form-control pull-right" placeholder="Search Courses" value="<?php echo $_REQUEST["srch"];?>" autocomplete="off" spellcheck="false"/>
+                	<input type="text" name="srch" class="typeahead tt-query search-query form-control pull-right" placeholder="<?php echo isset($search_cor_translate)? $search_cor_translate : '';?>" value="<?php echo isset($_REQUEST['srch'])? $_REQUEST['srch'] : '';?>" autocomplete="off" spellcheck="false"/>
                 </span>
                 <span class="col-md-2 col-sm-4 col-xs-4 col-lg-2 pull-left" style="padding:0;">
                 	<button type="submit" class="btn btn-primary pull-left" style="border-radius: 0px 23px 23px 0px; height:36px;"><i class="icon icon-search"></i></button>
@@ -291,8 +295,10 @@ include("google_analytic_learning.php");
 												$l_slug = $result["l_slug"];
 												$l_code = $result["l_code"];
 												$status = $result["status"];
+												$l_name_lan_str = "l_name_".$language;
+												$l_name_lan = $result[$l_name_lan_str];
 												?>
-												<li><a href="<?php echo $actual_link ?>?lan=<?php echo $l_slug ?>"><?php echo $l_name ?></a></li>
+												<li><a href="<?php echo $actual_link ?>?lan=<?php echo $l_slug ?>"><?php echo $l_name_lan ?></a></li>
 												<?php }
 											?>
 											<?php
@@ -313,8 +319,10 @@ include("google_analytic_learning.php");
 												$l_slug = $result["l_slug"];
 												$l_code = $result["l_code"];
 												$status = $result["status"];
+												$l_name_lan_str = "l_name_".$language;
+												$l_name_lan = $result[$l_name_lan_str];
 												?>
-												<li><a href="<?php echo $actual_link ?>&lan=<?php echo $l_slug ?>"><?php echo $l_name ?></a></li>
+												<li><a href="<?php echo $actual_link ?>&lan=<?php echo $l_slug ?>"><?php echo $l_name_lan ?></a></li>
 												<?php }
 											?>					
 		<?php
@@ -324,7 +332,7 @@ include("google_analytic_learning.php");
 							</li>
             <!-- // END user -->
 			<?php
-	if (isset($_SESSION['skills']))
+	if (isset($_COOKIE['skills']))
 	{
 		?>
 									<!-- notifications -->
@@ -332,7 +340,7 @@ include("google_analytic_learning.php");
                                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-bell-o"></i>
                                         <?php
-                                        $profile_chk = "SELECT * FROM user WHERE (full_name = '' OR email = ''  OR language = '' OR dob = '' OR state = '' OR country = '' OR education = '' OR occupation = '') AND u_id = '".$_SESSION['id']."'";
+                                        $profile_chk = "SELECT * FROM user WHERE (full_name = '' OR email = ''  OR language = '' OR dob = '' OR state = '' OR country = '' OR education = '' OR occupation = '') AND u_id = '".$_COOKIE['id']."'";
 										$sql_profile_chk = mysqli_query($conn,$profile_chk);
 										$profile_chk_num = mysqli_num_rows($sql_profile_chk );
 										if($profile_chk_num >= 1){	
@@ -371,7 +379,7 @@ include("google_analytic_learning.php");
                                             <img src="images/people/50/guy-2.jpg" alt="people" class="img-circle" width="30">
                                           </div>-->
                                           <div class="media-body">
-                                            <a href="javascript:void();">You Don't have Any Notification</a>
+                                            <p>You Don't have Any Notification</p>
                                             <!--<br/>
                                             <span class="text-caption text-muted">5 mins ago</span>-->
                                           </div>
@@ -385,21 +393,21 @@ include("google_analytic_learning.php");
 									<li class="dropdown">
 										<a href="#" class="dropdown-toggle user" data-toggle="dropdown">
                                         	<?php
-											$pro_image = "images/profile/".$_SESSION["profile_pic"];
-                                            if(!file_exists($pro_image) || !isset($_SESSION['profile_pic'])){
+											$pro_image = "images/profile/".$_COOKIE["profile_pic"];
+                                            if(!file_exists($pro_image) || !isset($_COOKIE['profile_pic'])){
 											$pro_image = "images/user_place.png";
 											}					
-											if($pro_image == "images/profile/" || !isset($_SESSION['profile_pic'])){
+											if($pro_image == "images/profile/" || !isset($_COOKIE['profile_pic'])){
 											$pro_image = "images/user_place.png";
 											}
 											?>
-											<img src="<?php echo $pro_image;?>" alt="" class="img-circle" width="30px" height="30px"/> <?php echo $_SESSION["full_name"]; ?> <span class="caret"></span>
+											<img src="<?php echo $pro_image;?>" alt="" class="img-circle" width="30px" height="30px"/> <?php echo $_COOKIE["full_name"]; ?> <span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu" role="menu" style="margin-top: 64px; height: auto; display: none; overflow: visible; top: 100%; opacity: 0;">
-											<li class="active"><a href="dashboard.php"><i class="fa fa-bar-chart-o"></i> <?php echo $dashboard_translate;?></a></li>
-											<li><a href="profile.php"><i class="fa fa-user"></i> <?php echo $proile_translate;?></a></li>
-											<li><a href="change_password.php"><i class="fa fa-lock"></i><?php echo $change_password_translate;?></a></li>
-											<li><a href="logout.php"><i class="fa fa-sign-out"></i> <?php echo $logout_translate;?></a></li>
+											<li class="<?php if($pagename == 'dashboard.php'){ echo 'active';}?>"><a href="dashboard.php"><i class="fa fa-bar-chart-o"></i> <?php echo $dashboard_translate;?></a></li>
+											<li class="<?php if($pagename == 'profile.php'){ echo 'active';}?>"><a href="profile.php"><i class="fa fa-user"></i> <?php echo $proile_translate;?></a></li>
+											<li class="<?php if($pagename == 'change_password.php'){ echo 'active';}?>"><a href="change_password.php"><i class="fa fa-lock"></i><?php echo $change_password_translate;?></a></li>
+											<li class="<?php if($pagename == 'logout.php'){ echo 'active';}?>"><a href="logout.php"><i class="fa fa-sign-out"></i> <?php echo $logout_translate;?></a></li>
 										</ul>
 									</li>
 									<?php
@@ -408,7 +416,7 @@ include("google_analytic_learning.php");
 								{
 									?>
 
-									<a href="#" class="navbar-btn btn btn-primary" data-toggle="modal" data-target="#login">Log In</a>
+									<a href="#" class="navbar-btn btn btn-primary" data-toggle="modal" data-target="#login"><?php echo $login_translate;?></a>
 
 		<?php }
 ?>
